@@ -1,6 +1,7 @@
 window.addEventListener('load', ()=> {
     let lon;
     let lat;
+    let loadingSymbol = document.querySelector('.container');
     let temperatureDescription = document.querySelector('.temperature-description');
     let temperatureDegree = document.querySelector('.temperature-degree');
     let locationTimezone = document.querySelector('.location-timezone');
@@ -17,6 +18,9 @@ window.addEventListener('load', ()=> {
 
             fetch(api)
             .then(response => {
+                // while (status != 200) { 
+                //     return `/images/Loading.gif`
+                // } 
                 return response.json();
             })
             .then(data => {

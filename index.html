@@ -5,21 +5,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href = "./style.css" />
-        <link rel="icon" href="http://openweathermap.org/img/wn/04d@2x.png">
+        <link rel="icon" href="http://openweathermap.org/img/wn/02d@2x.png">
         <title>Weather</title>
     </head>
     <body>
-        
-        <div class="location">
-            <h1 class = "location-timezone">Timezone</h1>
-            <img src = "http://openweathermap.org/img/wn/04d@2x.png" id = "icon" width = "128" height = "128"></icon>
-        </div>
-        <div class="temperature">
-            <div class="degree-section">
-                <h2 class="temperature-degree">34</h2>
-                <span>F</span>
+        <div class="container">
+            <div class="location">
+                <h1 class = "location-timezone"></h1>
+                <img src = "/images/Loading.gif" id = "icon" width = "128" height = "128"></icon>
             </div>
-            <div class="temperature-description">It's cold here</div>
+            <div class="temperature">
+                <div class="degree-section">
+                    <h2 class="temperature-degree"></h2>
+                    <span>F</span>
+                </div>
+                <div class="temperature-description"></div>
+            </div>
         </div>
 
         <script src ="app.js"></script>
