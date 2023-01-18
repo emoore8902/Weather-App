@@ -18,9 +18,6 @@ window.addEventListener('load', ()=> {
 
             fetch(api)
             .then(response => {
-                // while (status != 200) { 
-                //     return `/images/Loading.gif`
-                // } 
                 return response.json();
             })
             .then(data => {
@@ -31,6 +28,7 @@ window.addEventListener('load', ()=> {
                 let farenheit = ((data.main.temp-273.15)*1.8)+32;
 
                 temperatureDegree.textContent = Math.floor(farenheit);
+                temperatureSpan.textContent = "F";
                 temperatureDescription.textContent = description;
                 locationTimezone.textContent = data.name;
                 //locationTimezone.textContent = formattedTime;
