@@ -4,7 +4,7 @@ window.addEventListener('load', ()=> {
     let temperatureDescription = document.querySelector('.temperature-description');
     let temperatureDegree = document.querySelector('.temperature-degree');
     let locationTimezone = document.querySelector('.location-timezone');
-    let temperatureSection = document.querySelector('.temperature');
+    let temperatureSection = document.querySelector('.degree-section');
     const temperatureSpan = document.querySelector('.temperature span');
 
     if(navigator.geolocation){
@@ -12,45 +12,43 @@ window.addEventListener('load', ()=> {
             lon = position.coords.longitude;
             lat = position.coords.latitude;
 
-            //const proxy = 'https://cors-anywhere.herokuapp.com/';
             const APIkey = `5e8a9bd9a44e0437703b1c26020e0dde`;
-            const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIkey}`
-            
+            const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}`;
+
             fetch(api)
             .then(response => {
                 return response.json();
             })
             .then(data => {
                 console.log(data);
-                const {temperature, summary, icon} = data.currently;
+                const {temp} = data.main;
+                const {description} = data.weather[0];
                 //Set DOM Elements from the API
-                temperatureDegree.textContent = temperature;
-                temperatureDescription.textContent = summary;
-                locationTimezone.textContent = data.timezone;
-                    //FORMULAT FOR CELSIUS
-                    let celsius = (temperature - 32) * (5 / 9); 
+                let farenheit = ((data.main.temp-273.15)*1.8)+32;
+
+                temperatureDegree.textContent = Math.floor(farenheit);
+                temperatureDescription.textContent = description;
+                locationTimezone.textContent = data.name;
+                //locationTimezone.textContent = formattedTime;
+                    //FORMULA FOR CELSIUS
+                    let celsius = (farenheit - 32) * (5 / 9); 
                     //Set Icon
-                    setIcons(icon, document.querySelector('icon'));
+                    document.getElementById("icon").src=`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
                 //Change temperature to Celsius/Farenheit
                 temperatureSection.addEventListener('click', () => {
                     if(temperatureSpan.textContent === "F") {
-                        temperatureSpan.textContent === "C";
-                        temperatureDegree.textContent = Math.floor(celsius * 100)/100;
+                        temperatureSpan.textContent = "C";
+                        temperatureDegree.textContent = Math.floor(celsius);
                     } else {
-                        temperatureSpan.textContent === "F";
-                        temperatureDegree.textContent = temperature;
+                        temperatureSpan.textContent = "F";
+                        temperatureDegree.textContent = Math.floor(farenheit);
                     }
                 })
             })
-        }) 
-    } else {
+        })
+     } else {
         h1.textContent = "please enable ur location";
     }
-    function setIcons(icon, iconID) {
-        const skycons = new Skycons({color: "white"});
-        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-        skycons.play();
-        return skycons.set(iconID, Skycons[currentIcon]);
-    }
+
 })

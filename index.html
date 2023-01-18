@@ -5,13 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href = "./style.css" />
+        <link rel="icon" href="http://openweathermap.org/img/wn/04d@2x.png">
         <title>Weather</title>
     </head>
     <body>
         
         <div class="location">
             <h1 class = "location-timezone">Timezone</h1>
-            <canvas class = "icon" width = "128" height = "128"></canvas>
+            <img src = "http://openweathermap.org/img/wn/04d@2x.png" id = "icon" width = "128" height = "128"></icon>
         </div>
         <div class="temperature">
             <div class="degree-section">
@@ -21,7 +22,6 @@
             <div class="temperature-description">It's cold here</div>
         </div>
 
-        <script src ="skycons.js"></script>
         <script src ="app.js"></script>
     </body>
 </html>
